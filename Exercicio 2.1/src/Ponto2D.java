@@ -9,6 +9,11 @@ public class Ponto2D {
 		this.y = y1;
 	}
 	
+	public Ponto2D() {
+		x = 0;
+		y = 0;
+	}
+	
 	public String toString(){
 		
 		return x + "," + y;
