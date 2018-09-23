@@ -1,5 +1,7 @@
 package Exercicios2;
 
-public class Paralelogramo extends Quadrilatero {
+public class Paralelogramo extends Quadrilatero{
+		
+		
 	
 }
