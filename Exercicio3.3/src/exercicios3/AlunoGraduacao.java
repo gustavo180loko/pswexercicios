@@ -20,8 +20,6 @@ public class AlunoGraduacao extends Aluno{
 	public void setRa(int ra) {
 		this.ra = ra;
 	}
-
-	
 	
 	public AlunoGraduacao(String nome, int idade, int cpf, String curso, int ra) {
 		super();

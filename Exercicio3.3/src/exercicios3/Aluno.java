@@ -6,7 +6,7 @@ public class Aluno {
 	public int idade;
 	public int cpf;
 	
-	public Aluno(String nome, int idade, int cpf) {
+	public Aluno(String nome, int idade, int cpf) { 
 		
 		this.nome = nome;
 		this.idade = idade;
