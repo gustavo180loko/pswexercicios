@@ -1,7 +1,82 @@
 package Lista;
 
-public class Lista {
+public class Lista <TIPO>{
 	
+	private class No {
+		
+		private No prox;
+		private No ant;
+		
+		private TIPO info;
+		
+		public No(No prox, No ant, TIPO info) {
+			this.prox = prox;
+			this.ant = ant;
+			this.info = info;
+		}
+
+		public No getProx() {
+			return prox;
+		}
+		public void setProx(No prox) {
+			this.prox = prox;
+		}
+
+		public No getAnt() {
+			return ant;
+		}
+		public void setAnt(No ant) {
+			this.ant = ant;
+		}
+
+		public TIPO getInfo() {
+			return info;
+		}
+
+		public void setInfo(TIPO info) {
+			this.info = info;
+		}
+		
+	}
+	
+	
+	private class IteratorConcreto implements Iterator<TIPO> {
+		private No noAtual;
+		
+		IteratorConcreto(No inicio){
+			this.noAtual = inicio;
+		}
+		@Override
+		public TIPO getDados() {
+			if(noAtual == null) {
+				return null;
+			}
+			return noAtual.getInfo();
+		}
+
+		@Override
+		public TIPO proximo() {
+			if(noAtual == null) {
+				return null;
+			}
+			TIPO obj = noAtual.getInfo();
+			noAtual = noAtual.getProx();
+			return obj;
+		}
+
+		@Override
+		public TIPO anterior() {
+			if(noAtual == null) {
+				return null;
+			}
+			TIPO obj = noAtual.getInfo();
+			noAtual = noAtual.getAnt();
+			return obj;
+		}
+
+	}
+
+
 	private No inicio;
 	private No fim;
 	
@@ -13,8 +88,8 @@ public class Lista {
 	}
 	
 	
-	public void inserirNoFim(Object info) {
-		No produto = new No(null,inicio,info);
+	public void inserirNoFim() {
+		No produto = new No(null,inicio,fim);
 		if(inicio == null) {
 			inicio = fim = produto;
 		}
@@ -24,8 +99,17 @@ public class Lista {
 		}
 	}
 	
+	public Iterator<TIPO> getInicio() {
+		Iterator<TIPO> i = new IteratorConcreto(inicio);
+		return i;
+	}
 	
-	public void inserirNoInicio(Object info) {
+	public Iterator<TIPO> getFinal() {
+		Iterator<TIPO> i = new IteratorConcreto(fim);
+		return i;
+	}
+	
+	public void inserirNoInicio(TIPO info) {
 		No produto = new No(inicio,null,info);
 		if(inicio == null) {
 			inicio = fim = produto;
@@ -36,7 +120,7 @@ public class Lista {
 		}
 	}
 	
-	public Object remover(Object o) {
+	public TIPO remover(TIPO o) {
 		No aux;
 		aux = inicio;
 		while(aux!=null && aux.getInfo()!=o) {
@@ -59,14 +143,33 @@ public class Lista {
 			aux=aux.getAnt();
 			aux.setProx(null);
 		}
-		aux=null;
-		return 1;
+		return aux;
+	}
+	
+	public TIPO removerInicio() {
+		No aux;
+		aux = inicio;
+		if(aux == null) {
+			return null;
+		}
+		inicio = aux.getProx();
+		return  aux;
+	}
+	
+	public TIPO removerFinal() {
+		No aux;
+		aux = fim;
+		if(aux == null) {
+			return null;
+		}
+		fim = aux.getAnt();
+		return aux;
 	}
 	
 	
-	public Object pesquisar(Object o) {
+	public TIPO pesquisar(TIPO o) {
 		No aux;
-		aux = inicio;
+		aux =  inicio;
 		while(aux != null && aux.getInfo() != o) {
 			aux = aux.getProx();
 		}
@@ -80,11 +183,13 @@ public class Lista {
 	
 	public void imprimir() {
 		No aux;
-		aux = inicio;
+		aux =  inicio;
 		System.out.println("LISTA");
+		int i = 1;
 		while(aux!=null) {
-			System.out.println(aux.getInfo());
+			System.out.println(i + " - " +aux.getInfo());
 			aux=aux.getProx();
+			i++;
 		}
 	}
 }

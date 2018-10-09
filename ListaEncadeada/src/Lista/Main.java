@@ -3,9 +3,11 @@ package Lista;
 public class Main {
 
 	public static void main(String[] args) {
-		Lista l = new Lista();
-		l.inserirNoFim(9);
-		l.inserirNoInicio(1);
+		Lista<Integer> l = new Lista<Integer>();
+		l.inserirNoFim(new Integer(9));
+		l.inserirNoInicio(new Integer(1));
+		l.removerInicio();
+		l.inserirNoFim(new String("Gustavo"));
 		
 		Object ax = l.pesquisar(1);
 		if(ax != null) {
@@ -17,4 +19,6 @@ public class Main {
 		l.imprimir();
 		
 	}
+	
+	
 }

@@ -1,13 +1,13 @@
 package Lista;
 
-public class No {
+public class No <TIPO> {
 	
 	private No prox;
 	private No ant;
 	
-	private Object info;
+	private TIPO info;
 	
-	public No(No prox, No ant, Object info) {
+	public No(No prox, No ant, TIPO info) {
 		this.prox = prox;
 		this.ant = ant;
 		this.info = info;
@@ -28,10 +28,10 @@ public class No {
 	}
 
 	
-	public Object getInfo() {
+	public TIPO getInfo() {
 		return info;
 	}
-	public void setInfo(Object info) {
+	public void setInfo(TIPO info) {
 		this.info = info;
 	}
 
