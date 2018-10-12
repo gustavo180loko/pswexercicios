@@ -7,7 +7,6 @@ public class Main {
 		t.openFile();
 		t.addRecords();
 		t.closeFile();
-
 	}
 
 }

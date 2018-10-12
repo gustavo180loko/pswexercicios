@@ -1,6 +1,6 @@
 package Files;
 
-public class File {
+public class Partido {
 	
 	//POLITICO
 	private String partido;
@@ -8,13 +8,13 @@ public class File {
 	private int numero;
 	
 	
-	public File(String partido, String nome, int numero) {
+	public Partido(String partido, String nome, int numero) {
 		this.partido = partido;
 		this.nome = nome;
 		this.numero = numero;
 	}
 	
-	public File() {
+	public Partido() {
 		this.partido = "";
 		this.nome = "";
 		this.numero = 0;
@@ -25,8 +25,14 @@ public class File {
 	}
 	public void setPartido(String partido) {
 		this.partido = partido;
+		
 	}
 	
+
+	@Override
+	public String toString() {
+		return "Partido [partido=" + partido + ", nome=" + nome + ", numero=" + numero + "]";
+	}
 
 	public String getNome() {
 		return nome;

@@ -15,12 +15,11 @@ public class TextCreator {
 			e.printStackTrace();
 			System.exit(0);
 		}
-		
 	}
 	
 	public void addRecords() {
 		
-		File politico = new File();
+		Partido politico = new Partido();
 		Scanner sc = new Scanner(System.in);//Para poder usar o teclado
 		
 		System.out.println("Para terminar, digite <ctrl> d no UNIX/LINUS \n"+"ou <ctrl> z no Windows.\n\n");
@@ -34,7 +33,7 @@ public class TextCreator {
 			if(politico.getNumero() > 0) {
 				try {
 					objWriter.append( // Adiciona ao arquivo;
-							String.format("%5s - %5d - %s\n",
+							String.format("%s  %d  %s\n",
 									politico.getPartido(),
 									politico.getNumero(),
 									politico.getNome()));
