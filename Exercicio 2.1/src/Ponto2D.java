@@ -32,7 +32,7 @@ public class Ponto2D {
 
 	public String toString(){
 		
-		return "X: "+x + ","+" Y: " + y;
+		return String.format(x +" "+ y);
 		
 	}
 }
