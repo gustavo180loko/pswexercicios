@@ -17,32 +17,30 @@ private FileWriter file;
 		}
 	}
 	
-	public void addRecords(Passaros) {
-		
+	public void addRecords() {
+		Passaros p = new Passaros();
 		Scanner sc = new Scanner(System.in);//Para poder usar o teclado
 		
 		System.out.println("Para terminar, digite <ctrl> d no UNIX/LINUS \n"+"ou <ctrl> z no Windows.\n\n");
-		System.out.println("Informe os dados do Politico(NUMERO, NOME E PARTIDO):");
+		System.out.println("Informe os dados dos Passaros(Especie, Numero Gaiola, Tempo, Valor):");
 		
 		while(sc.hasNext()) { 
-			politico.setNumero(sc.nextInt());
-			politico.setNome(sc.next());
-			politico.setPartido(sc.next());
-			
-			if(politico.getNumero() > 0) {
+			p.setEspecie(sc.next());
+			p.setNumGaiola(sc.nextInt());
+			p.setTempo(sc.nextInt());
+			p.setValor(sc.nextDouble());
 				try {
-					objWriter.append( // Adiciona ao arquivo;
-							String.format("%s  %d  %s\n",
-									politico.getPartido(),
-									politico.getNumero(),
-									politico.getNome()));
+					file.append( // Adiciona ao arquivo;
+							String.format("%s  %d  %d %f\n",
+									p.getEspecie(),
+									p.getNumGaiola(),
+									p.getTempo(),
+									p.getValor()));
 				} catch (IOException e) {
 					e.printStackTrace();
 					System.exit(0);
 				}
-			}else {
-				System.out.println("O numero deve ser maior que 0");
-			}
+			
 		}
 		
 	}

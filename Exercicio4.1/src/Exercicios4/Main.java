@@ -5,6 +5,8 @@ public class Main {
 	public static void main(String args[]) {
 		
 		Passaros teste = new Passaros();
+		FileCreator f = new FileCreator();
+		FileRead r = new FileRead();
 		
 		Passaros p1 = new Passaros("ESPECIA1",250.0,1,2);
 		Passaros p2 = new Passaros("ESPECIA2",250.0,2,5);
@@ -21,8 +23,13 @@ public class Main {
 		System.out.println(loja.valorTotal());
 		System.out.println(loja.maisAntigo(teste));
 		
+		f.openFile();
+		f.addRecords();
+		f.closeFile();
 		
-		
+		r.openFile();
+		r.fileRead();
+		r.closeFile();
 	}
 	
 }
