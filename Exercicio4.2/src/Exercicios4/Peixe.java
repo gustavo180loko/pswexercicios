@@ -9,7 +9,11 @@ public class Peixe extends Animal{
 		this.caracteristica = carac;
 	}
 	
-	public String dados() {
+	public Peixe() {
+		
+	}
+	
+	public String toString() {
 		return String.format("Nome: %s\nComprimento: %.2f\nNumero Patas: %d\nCor: %s\nambiente: %s\nVelocidade media: %.2f\nCaracteristicas: %s\n",nome,comprimento,numPatas,cor,ambiente,velMedia,caracteristica);
 	}
 	
