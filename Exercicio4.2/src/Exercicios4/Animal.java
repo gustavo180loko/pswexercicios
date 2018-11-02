@@ -20,6 +20,10 @@ public class Animal {
 		
 	}
 	
+	public Animal() {
+	
+	}
+	
 	public String dados() {
 		return String.format("Nome: %s\nComprimento: %.2f\nNumero Patas: %d\nCor: %s\nambiente: %s\nVelocidade media: %.2f",nome,comprimento,numPatas,cor,ambiente,velMedia);
 	}
