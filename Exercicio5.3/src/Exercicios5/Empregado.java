@@ -17,8 +17,12 @@ public class Empregado {
 		this.salarioHora = salarioHora;
 	}
 	
+	public Empregado() {
+		
+	}
 	
-	public String dados() {
+	
+	public String toString() {
 		return String.format("Nome do empregado: %s\nDepartamento: %s\nHoras Trabalhadas: %d\nSalario por Hora: %.2f\n",nome,departamento,horasTrabalhadas,salarioHora);
 	}
 	
