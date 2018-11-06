@@ -24,6 +24,10 @@ public class Funcionario {
 		}
 	}
 	
+	public Funcionario() {
+		
+	}
+	
 	public String toString() {
 		
 		return String.format("Nome: %s %s\nDepartamento: %s\nData de Entrada: %s\nCPF: %s\nRG: %s\nSalario: %.2f",nome,sobrenome,departamento,dataInicio,cpf,rg,salario);
