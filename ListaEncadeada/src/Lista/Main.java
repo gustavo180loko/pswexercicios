@@ -3,21 +3,22 @@ package Lista;
 public class Main {
 
 	public static void main(String[] args) {
-		Lista<Integer> l = new Lista<Integer>();
-		l.inserirNoFim(new Integer(9));
-		l.inserirNoInicio(new Integer(1));
-		l.removerInicio();
-		l.inserirNoFim(new String("Gustavo"));
+			
+		Lista<Games> Games;
+		Games = new Lista();
 		
-		Object ax = l.pesquisar(1);
-		if(ax != null) {
-			System.out.println("Objeto encontrado:" +ax);
-		}else {
-			System.out.println("Objeto nao Encontrado");
-		}
+		Games.inserir(new Games("God of War"), 1);
+		Games.inserirFim(new Games("Spider man"));
+		mostrarListaIterator(Games);
 		
-		l.imprimir();
 		
+		
+	}
+	
+	public static void mostrarListaIterator(Lista<Games> l) {
+		Iterator<Games> i = l.getInicio();
+		Object o;
+		for(int j = 1; (o = i.proximo()) != null; System.out.println(j++ + " "+ o));
 	}
 	
 	

@@ -1,196 +1,227 @@
 package Lista;
 
-public class Lista <TIPO>{
+public class Lista<TIPO> {
 	
-	private class No {
-		
-		private No prox;
-		private No ant;
-		
-		private TIPO info;
-		
-		public No(No prox, No ant, TIPO info) {
-			this.prox = prox;
-			this.ant = ant;
-			this.info = info;
-		}
-
-		public No getProx() {
-			return prox;
-		}
-		public void setProx(No prox) {
-			this.prox = prox;
-		}
-
-		public No getAnt() {
-			return ant;
-		}
-		public void setAnt(No ant) {
-			this.ant = ant;
-		}
-
-		public TIPO getInfo() {
-			return info;
-		}
-
-		public void setInfo(TIPO info) {
-			this.info = info;
-		}
-		
-	}
-	
-	
-	private class IteratorConcreto implements Iterator<TIPO> {
+	public class IteradorConcreto implements Iterator<TIPO> {
 		private No noAtual;
 		
-		IteratorConcreto(No inicio){
-			this.noAtual = inicio;
+		IteradorConcreto(No noAtual) {
+			this.noAtual = noAtual;
 		}
-		@Override
+		
 		public TIPO getDados() {
-			if(noAtual == null) {
+			if(noAtual == null)
 				return null;
-			}
-			return noAtual.getInfo();
+			return noAtual.info;
 		}
 
-		@Override
 		public TIPO proximo() {
-			if(noAtual == null) {
+			if(noAtual == null)
 				return null;
-			}
-			TIPO obj = noAtual.getInfo();
-			noAtual = noAtual.getProx();
+			TIPO obj = noAtual.info;
+			noAtual = noAtual.prox;
 			return obj;
 		}
 
-		@Override
 		public TIPO anterior() {
-			if(noAtual == null) {
+			if(noAtual == null)
 				return null;
-			}
-			TIPO obj = noAtual.getInfo();
-			noAtual = noAtual.getAnt();
+			TIPO obj = noAtual.info;
+			noAtual = noAtual.ant;
 			return obj;
 		}
 
 	}
 
-
+	private class No {
+		public No prox;
+		public No ant;
+		
+		public TIPO info;
+	}
+	
+	
 	private No inicio;
 	private No fim;
-	
-	public Lista() {
-		
-		inicio = null;
-		fim = null;
-		
-	}
-	
-	
-	public void inserirNoFim() {
-		No produto = new No(null,inicio,fim);
-		if(inicio == null) {
-			inicio = fim = produto;
-		}
-		else {
-			fim.setProx(produto);
-			fim = produto;
-		}
-	}
+
+	private int tamanho = 0;
 	
 	public Iterator<TIPO> getInicio() {
-		Iterator<TIPO> i = new IteratorConcreto(inicio);
+		Iterator<TIPO> i = new IteradorConcreto(inicio);
 		return i;
 	}
 	
-	public Iterator<TIPO> getFinal() {
-		Iterator<TIPO> i = new IteratorConcreto(fim);
-		return i;
+	public Iterator<TIPO> getFim() {
+		return new IteradorConcreto(fim);
+	}
+
+	
+	public Lista() {
+		super();
 	}
 	
-	public void inserirNoInicio(TIPO info) {
-		No produto = new No(inicio,null,info);
+	public int getTamanho() {
+		return tamanho;
+	}
+	
+	public boolean isVazia() {
+		if(tamanho == 0) {
+			return true;
+		}
+		return false;
+	}
+
+	public void inserirInicio(TIPO obj) {
+		No novo = new No();
+		novo.info = obj;
+		novo.prox = inicio;
+		novo.ant = null;
+		
 		if(inicio == null) {
-			inicio = fim = produto;
+			inicio = novo;
+			fim = novo;
+		} else {
+			inicio.ant = novo;
+			inicio = novo;
 		}
-		else {
-			inicio.setAnt(produto);
-			inicio = produto;
-		}
+
+		tamanho++;
 	}
-	
-	public TIPO remover(TIPO o) {
-		No aux;
-		aux = inicio;
-		while(aux!=null && aux.getInfo()!=o) {
-			aux = aux.getProx();
-		}
-		if(aux==null) {
-			return null;
-		}
-		if(aux.getAnt()==null) {
-			inicio = aux.getProx();
-		}else {
-			aux=aux.getAnt();
-			aux.setProx(aux.getProx());
-		}
-		if(aux.getProx()!=null) {
-			aux=aux.getProx();
-			aux.setAnt(aux.getAnt());
-		}
-		if(aux.getProx()==null) {
-			aux=aux.getAnt();
-			aux.setProx(null);
-		}
-		return aux;
+
+	public void inserirFim(TIPO obj) {
+		No novo = new No();
+		novo.info = obj;
+		novo.prox = null;
+		novo.ant = fim;
+
+		if (fim != null)
+			fim.prox = novo;
+
+		fim = novo;
+		if (inicio == null)
+			inicio = novo;
+
+		tamanho++;
 	}
-	
+
+	public void inserir(TIPO obj, int pos) {		
+		if(pos < 1 || pos > tamanho + 1)
+			return;
+		
+		if(pos == 1) { 
+			inserirInicio(obj);
+			return;
+		}
+		
+		if(pos == tamanho + 1) { 
+			inserirFim(obj);
+			return;
+		}
+		
+		No novo = new No();
+		novo.info = obj;
+		novo.prox = null;
+		novo.ant = null;
+
+
+		No aux = inicio;
+		int cont = 1;
+		
+		while(cont < pos ) {
+			aux = aux.prox;
+			cont++;
+		}
+		
+		novo.ant = aux.ant;
+		novo.prox = aux;
+		aux.ant.prox = novo;
+		aux.ant = novo;
+		
+		tamanho++;
+	}
+
 	public TIPO removerInicio() {
-		No aux;
-		aux = inicio;
-		if(aux == null) {
+		if (inicio == null)
 			return null;
+
+		TIPO dado = inicio.info;
+
+		if (inicio == fim) { 
+			inicio = null;
+			fim = null;
+		} else {
+			inicio.prox.ant = null;
+			inicio = inicio.prox;
 		}
-		inicio = aux.getProx();
-		return  aux;
+
+		tamanho--;
+
+		return dado;
 	}
-	
-	public TIPO removerFinal() {
-		No aux;
-		aux = fim;
-		if(aux == null) {
+
+	public TIPO removerFim() {
+		if (fim == null) 
 			return null;
+
+		TIPO dado = fim.info;
+
+		if (inicio == fim) {
+			inicio = null;
+			fim = null;
+		} else {
+			fim.ant.prox = null;
+			fim = fim.ant;
 		}
-		fim = aux.getAnt();
-		return aux;
+		tamanho--;
+
+		return dado;
 	}
-	
-	
-	public TIPO pesquisar(TIPO o) {
-		No aux;
-		aux =  inicio;
-		while(aux != null && aux.getInfo() != o) {
-			aux = aux.getProx();
-		}
-		if(aux == null) {
+
+	public TIPO remover(int pos) {
+		if(pos < 1 || pos > tamanho)
 			return null;
-		}else {
-			return aux.getInfo();
+		
+		if(pos == 1) { 
+			return removerInicio();
 		}
+		
+		if(pos == tamanho) { 
+			return removerFim();
+		}
+		
+		No aux = inicio;
+		int cont = 1;
+		
+		
+		while(cont < pos ) {
+			aux = aux.prox;
+			cont++;
+		}
+		
+		TIPO dado = aux.info;
+		
+		aux.ant.prox = aux.prox;
+		aux.prox.ant = aux.ant;
+		
+		tamanho--;
+		return dado;
 	}
-	
-	
-	public void imprimir() {
-		No aux;
-		aux =  inicio;
-		System.out.println("LISTA");
-		int i = 1;
-		while(aux!=null) {
-			System.out.println(i + " - " +aux.getInfo());
-			aux=aux.getProx();
-			i++;
+
+	public TIPO pesquisar(int pos) {
+		No aux = inicio;
+		int cont = 1;
+
+		if (tamanho == 0)
+			return null;
+
+		if (pos > tamanho)
+			return null;
+
+		while (cont < pos) {
+			aux = aux.prox;
+			cont++;
 		}
+
+		return aux.info;
 	}
 }
-	
