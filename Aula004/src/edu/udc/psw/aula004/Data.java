@@ -12,6 +12,10 @@ public class Data {
 		this.ano = ano;
 	}
 	
+	public Data() {
+		
+	}
+	
 	public int getDia() {
 		return dia;
 	}

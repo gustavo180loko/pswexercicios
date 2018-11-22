@@ -10,6 +10,10 @@ public class Hora {
 			this.minuto = minuto;
 		}
 		
+		public Hora() {
+			
+		}
+		
 		public byte incrementoHora() {
 			hora++;
 			return hora;
